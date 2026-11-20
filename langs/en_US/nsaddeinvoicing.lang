@@ -1,0 +1,44 @@
+# Translation file
+
+#
+# Generic
+#
+
+# Module label 'ModuleNsaddeinvoicingName'
+ModuleNsaddeinvoicingName = E-invoicing add-on
+# Module description 'ModuleNsaddeinvoicingDesc'
+ModuleNsaddeinvoicingDesc = Mass actions on the lines of draft supplier invoices: change the reference (products of the supplier) and delete the lines checked
+NsaddeinvoicingDescription = E-invoicing add-on
+
+#
+# Admin page
+#
+NsaddeinvoicingSetup = E-invoicing add-on - Setup
+NsaddeinvoicingErrorNsinfoRequired = The NSINFO framework version 23.8.0 or more is required: the module "NS INFO" (nsinfo) must be installed and enabled before enabling the module "E-invoicing add-on".
+Settings = Settings
+NSADDEINVOICING_GENERAL1=Options
+
+#
+# About page
+#
+About = About
+NsaddeinvoicingAbout = E-invoicing add-on - About
+
+#
+# Home page
+#
+NsaddeinvoicingArea = E-invoicing add-on
+
+# Mass actions on the lines
+NsaddeinvoicingActions = Actions on the lines
+NsaddeinvoicingChangeRef = Change the reference
+NsaddeinvoicingDeleteLines = Delete the lines
+NsaddeinvoicingCurrentRef = Current reference
+NsaddeinvoicingNewRef = New reference (products of the supplier)
+NsaddeinvoicingKeep = - Do not change -
+NsaddeinvoicingNoRef = No reference
+NsaddeinvoicingConfirmDelete = Delete the %s line(s) checked? This cannot be undone.
+NsaddeinvoicingNoSupplierProduct = No product available for the supplier of this invoice.
+NsaddeinvoicingCheckAll = Check all
+NsaddeinvoicingChangedRefs = %s reference(s) changed
+NsaddeinvoicingDeletedLines = %s line(s) deleted

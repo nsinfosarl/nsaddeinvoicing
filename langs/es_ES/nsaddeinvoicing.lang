@@ -1,0 +1,64 @@
+# Copyright (C) 2026 Nicolas Silobre <contact@ns-info.fr>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+#
+# Generic
+#
+
+# Module label 'ModuleNsaddeinvoicingName'
+ModuleNsaddeinvoicingName = Complemento e-invoicing
+# Module description 'ModuleNsaddeinvoicingDesc'
+ModuleNsaddeinvoicingDesc = Acciones masivas sobre las líneas de las facturas de proveedor en borrador: cambiar la referencia (productos del proveedor) y eliminar las líneas marcadas
+NsaddeinvoicingDescription = Complemento e-invoicing
+
+#
+# Admin page
+#
+NsaddeinvoicingSetup = Complemento e-invoicing - Ajustes
+Settings = Ajustes
+About = Acerca de
+NsaddeinvoicingAbout = Complemento e-invoicing - Acerca de
+
+NSADDEINVOICING_GENERAL1=Opciones
+NsaddeinvoicingErrorNsinfoRequired = Se requiere el framework NSINFO versión 23.8.0 o superior: el módulo « NS INFO » (nsinfo) debe estar instalado y activado antes de activar el módulo « Complemento e-invoicing ».
+NsaddeinvoicingArea = Complemento e-invoicing
+
+# Mass actions on the lines
+NsaddeinvoicingActions = Actions sur les lignes
+NsaddeinvoicingChangeRef = Changer la référence
+NsaddeinvoicingDeleteLines = Supprimer les lignes
+NsaddeinvoicingCurrentRef = Référence en cours
+NsaddeinvoicingNewRef = Nouvelle référence (produits du fournisseur)
+NsaddeinvoicingKeep = - Ne pas changer -
+NsaddeinvoicingNoRef = Aucune référence
+NsaddeinvoicingConfirmDelete = Supprimer les %s ligne(s) cochée(s) ? Cette action est définitive.
+NsaddeinvoicingNoSupplierProduct = Aucun produit disponible pour le fournisseur de cette facture.
+NsaddeinvoicingCheckAll = Tout cocher
+NsaddeinvoicingChangedRefs = %s référence(s) modifiée(s)
+NsaddeinvoicingDeletedLines = %s ligne(s) supprimée(s)
+
+# Mass actions on the lines
+NsaddeinvoicingActions = Acciones sobre las líneas
+NsaddeinvoicingChangeRef = Cambiar la referencia
+NsaddeinvoicingDeleteLines = Eliminar las líneas
+NsaddeinvoicingCurrentRef = Referencia actual
+NsaddeinvoicingNewRef = Nueva referencia (productos del proveedor)
+NsaddeinvoicingKeep = - No cambiar -
+NsaddeinvoicingNoRef = Sin referencia
+NsaddeinvoicingConfirmDelete = ¿Eliminar las %s línea(s) marcada(s)? Esta acción es definitiva.
+NsaddeinvoicingNoSupplierProduct = Ningún producto disponible para el proveedor de esta factura.
+NsaddeinvoicingCheckAll = Marcar todo
+NsaddeinvoicingChangedRefs = %s referencia(s) modificada(s)
+NsaddeinvoicingDeletedLines = %s línea(s) eliminada(s)
