@@ -23,13 +23,13 @@
  * \brief   About page of module Nsaddeinvoicing.
  */
 
-// Load Dolibarr environment
+// Chargement de l'environnement Dolibarr
 $res = 0;
-// Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
+// Essai de main.inc.php dans la racine web connue, définie dans CONTEXT_DOCUMENT_ROOT (pas toujours définie)
 if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
 	$res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/main.inc.php";
 }
-// Try main.inc.php into web root detected using web root calculated from SCRIPT_FILENAME
+// Essai de main.inc.php dans la racine web détectée à partir de SCRIPT_FILENAME
 $tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME'];
 $tmp2 = realpath(__FILE__);
 $i = strlen($tmp) - 1;
@@ -44,7 +44,7 @@ if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/main.inc.php")) {
 if (!$res && $i > 0 && file_exists(dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php")) {
 	$res = @include dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php";
 }
-// Try main.inc.php using relative path
+// Essai de main.inc.php avec un chemin relatif
 if (!$res && file_exists("../../main.inc.php")) {
 	$res = @include "../../main.inc.php";
 }
@@ -71,7 +71,7 @@ require_once '../lib/nsaddeinvoicing.lib.php';
 // Translations
 $langs->loadLangs(array("errors", "admin", "nsaddeinvoicing@nsaddeinvoicing"));
 
-// Access control
+// Contrôle d'accès
 if (!$user->admin) {
 	accessforbidden();
 }
@@ -104,7 +104,7 @@ $linkback = '<a href="'.($backtopage ? $backtopage : DOL_URL_ROOT.'/admin/module
 
 print load_fiche_titre($langs->trans($title), $linkback, 'object_nsaddeinvoicing@nsaddeinvoicing');
 
-// Configuration header
+// En-tête de la configuration
 $head = nsaddeinvoicingAdminPrepareHead();
 print dol_get_fiche_head($head, 'about', $langs->trans($title), 0, 'nsaddeinvoicing@nsaddeinvoicing');
 
@@ -112,7 +112,7 @@ dol_include_once('/nsaddeinvoicing/core/modules/modNsaddeinvoicing.class.php');
 $tmpmodule = new modNsaddeinvoicing($db);
 print $tmpmodule->getDescLong();
 
-// Page end
+// Fin de page
 print dol_get_fiche_end();
 llxFooter();
 $db->close();

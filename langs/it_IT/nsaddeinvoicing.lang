@@ -14,17 +14,17 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #
-# Generic
+# Générique
 #
 
-# Module label 'ModuleNsaddeinvoicingName'
+# Libellé du module 'ModuleNsaddeinvoicingName'
 ModuleNsaddeinvoicingName = Complemento e-invoicing
-# Module description 'ModuleNsaddeinvoicingDesc'
+# Description du module 'ModuleNsaddeinvoicingDesc'
 ModuleNsaddeinvoicingDesc = Azioni di massa sulle righe delle fatture fornitore in bozza: cambiare il riferimento (prodotti del fornitore) ed eliminare le righe selezionate
 NsaddeinvoicingDescription = Complemento e-invoicing
 
 #
-# Admin page
+# Page d'administration
 #
 NsaddeinvoicingSetup = Complemento e-invoicing - Impostazioni
 Settings = Impostazioni
@@ -32,24 +32,14 @@ About = Informazioni
 NsaddeinvoicingAbout = Complemento e-invoicing - Informazioni
 
 NSADDEINVOICING_GENERAL1=Opzioni
+NSADDEINVOICING_DROPDOWN_OVERFLOW = Forza la lista a discesa a uscire dal popup
+NSADDEINVOICING_DROPDOWN_OVERFLOW_Tooltip = Nella finestra « Cambia il riferimento », l'elenco dei prodotti viene visualizzato sopra il popup invece che al suo interno. Attivare se l'elenco è tagliato o visualizzato male (browser su macOS in particolare).
+NSADDEINVOICING_POPUP_HEIGHT = Forza l'altezza del popup all'altezza della lista a discesa standard
+NSADDEINVOICING_POPUP_HEIGHT_Tooltip = Nella finestra « Cambia il riferimento », il popup viene allungato verso il basso dell'altezza dell'elenco dei prodotti (campo di ricerca e 200 px di risultati): l'elenco aperto sotto l'ultima riga entra nel popup senza essere tagliato (visualizzazione su macOS).
 NsaddeinvoicingErrorNsinfoRequired = Il framework NSINFO versione 23.8.0 o superiore è obbligatorio: il modulo « NS INFO » (nsinfo) deve essere installato e attivato prima di attivare il modulo « Complemento e-invoicing ».
 NsaddeinvoicingArea = Complemento e-invoicing
 
-# Mass actions on the lines
-NsaddeinvoicingActions = Actions sur les lignes
-NsaddeinvoicingChangeRef = Changer la référence
-NsaddeinvoicingDeleteLines = Supprimer les lignes
-NsaddeinvoicingCurrentRef = Référence en cours
-NsaddeinvoicingNewRef = Nouvelle référence (produits du fournisseur)
-NsaddeinvoicingKeep = - Ne pas changer -
-NsaddeinvoicingNoRef = Aucune référence
-NsaddeinvoicingConfirmDelete = Supprimer les %s ligne(s) cochée(s) ? Cette action est définitive.
-NsaddeinvoicingNoSupplierProduct = Aucun produit disponible pour le fournisseur de cette facture.
-NsaddeinvoicingCheckAll = Tout cocher
-NsaddeinvoicingChangedRefs = %s référence(s) modifiée(s)
-NsaddeinvoicingDeletedLines = %s ligne(s) supprimée(s)
-
-# Mass actions on the lines
+# Actions de masse sur les lignes
 NsaddeinvoicingActions = Azioni sulle righe
 NsaddeinvoicingChangeRef = Cambia il riferimento
 NsaddeinvoicingDeleteLines = Elimina le righe

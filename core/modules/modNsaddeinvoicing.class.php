@@ -29,12 +29,12 @@
 include_once DOL_DOCUMENT_ROOT . '/core/modules/DolibarrModules.class.php';
 
 /**
- *  Description and activation class for module Nsaddeinvoicing
+ *  Classe de description et d'activation du module Nsaddeinvoicing
  */
 class modNsaddeinvoicing extends DolibarrModules
 {
 	/**
-	 * Constructor. Define names, constants, directories, boxes, permissions
+	 * Constructeur. Définit les noms, constantes, répertoires, boîtes, droits
 	 *
 	 * @param DoliDB $db Database handler
 	 */
@@ -50,16 +50,16 @@ class modNsaddeinvoicing extends DolibarrModules
 		$this->description = "NsaddeinvoicingDescription";
 		$this->descriptionlong = "NsaddeinvoicingDescription";
 
-		// Author
+		// Auteur
 		$this->editor_name = 'NS INFO';
 		$this->editor_url = 'https://www.ns-info.fr';
 
-		// Possible values for version are: 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' or a version string like 'x.y.z'
+		// Valeurs possibles pour version : 'development', 'experimental', 'dolibarr', 'dolibarr_deprecated', 'experimental_deprecated' ou une chaîne de version comme 'x.y.z'
 		$this->version = trim(file_get_contents(__DIR__.'/../../VERSION'));
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->picto = 'nsaddeinvoicing@nsaddeinvoicing';
 
-		// Define some features supported by module (triggers, login, substitutions, menus, css, etc...)
+		// Définit quelques fonctionnalités prises en charge par le module (triggers, login, substitutions, menus, css, etc.)
 		$this->module_parts = array(
 			'triggers' => 0,
 			'css' => array('/nsaddeinvoicing/css/nsaddeinvoicing.css.php'),
@@ -70,19 +70,19 @@ class modNsaddeinvoicing extends DolibarrModules
 		$this->dirs = array("/nsaddeinvoicing/temp");
 		$this->config_page_url = array("setup.php@nsaddeinvoicing");
 		$this->hidden = false;
-		$this->depends = array('modNsinfo');	// NSINFO framework (checked in init() : activation refused if not enabled)
+		$this->depends = array('modNsinfo');	// Framework NSINFO (vérifié dans init() : activation refusée si non activé)
 		$this->requiredby = array();
 		$this->conflictwith = array();
 		$this->langfiles = array("nsaddeinvoicing@nsaddeinvoicing");
 
-		// Prerequisites
-		$this->phpmin = array(7, 4); // Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(20, 0); // Minimum version of Dolibarr required by module (functions of Dolibarr 23: backport of the NSINFO framework)
+		// Prérequis
+		$this->phpmin = array(7, 4); // Version minimale de PHP requise par le module
+		$this->need_dolibarr_version = array(20, 0); // Version minimale de Dolibarr requise par le module (fonctions de Dolibarr 23 : backport du framework NSINFO)
 		$this->need_javascript_ajax = 0;
 
-		// Messages at activation
-		$this->warnings_activation = array(); // Warning to show when we activate module. array('always'='text') or array('FR'='textfr','MX'='textmx'...)
-		$this->warnings_activation_ext = array(); // Warning to show when we activate an external module. array('always'='text') or array('FR'='textfr','MX'='textmx'...)
+		// Messages à l'activation
+		$this->warnings_activation = array(); // Avertissement à afficher à l'activation du module. array('always'='text') ou array('FR'='textfr','MX'='textmx'...)
+		$this->warnings_activation_ext = array(); // Avertissement à afficher à l'activation d'un module externe. array('always'='text') ou array('FR'='textfr','MX'='textmx'...)
 
 		$this->const = array();
 
@@ -108,13 +108,13 @@ class modNsaddeinvoicing extends DolibarrModules
 		$this->cronjobs = array();
 		/* END MODULEBUILDER CRON */
 
-		// Permissions provided by this module
+		// Droits fournis par ce module
 		$this->rights = array();
 		$r = 0;
 		/* BEGIN MODULEBUILDER PERMISSIONS */
 		/* END MODULEBUILDER PERMISSIONS */
 
-		// Menus provided by this module
+		// Menus fournis par ce module
 		$this->menu = array();
 		$r = 0;
 		/* BEGIN MODULEBUILDER TOPMENU */
@@ -123,31 +123,31 @@ class modNsaddeinvoicing extends DolibarrModules
 		/* BEGIN MODULEBUILDER LEFTMENU MYOBJECT */
 		/* END MODULEBUILDER LEFTMENU MYOBJECT */
 
-		// Exports profiles provided by this module
+		// Profils d'export fournis par ce module
 		$r = 0;
 		/* BEGIN MODULEBUILDER EXPORT MYOBJECT */
 		/* END MODULEBUILDER EXPORT MYOBJECT */
 
-		// Imports profiles provided by this module
+		// Profils d'import fournis par ce module
 		$r = 0;
 		/* BEGIN MODULEBUILDER IMPORT MYOBJECT */
 		/* END MODULEBUILDER IMPORT MYOBJECT */
 	}
 
 	/**
-	 *  Function called when module is enabled.
-	 *  The init function add constants, boxes, permissions and menus (defined in constructor) into Dolibarr database.
-	 *  It also creates data directories
+	 *  Fonction appelée à l'activation du module.
+	 *  La fonction init ajoute dans la base Dolibarr les constantes, boîtes, droits et menus (définis dans le constructeur).
+	 *  Elle crée aussi les répertoires de données
 	 *
-	 * @param string $options Options when enabling module ('', 'noboxes')
-	 * @return     int                1 if OK, 0 if KO
+	 * @param string $options Options à l'activation du module ('', 'noboxes')
+	 * @return     int                1 si OK, 0 si KO
 	 */
 	public function init($options = '')
 	{
 		global $langs;
 
-		// NSINFO framework (module nsinfo) must be installed and enabled, in version 23.8.0 at least (backport of the
-		// functions of Dolibarr 23 used by the pages generated by ModuleBuilder)
+		// Le framework NSINFO (module nsinfo) doit être installé et activé, en version 23.8.0 au minimum (backport des
+		// fonctions de Dolibarr 23 utilisées par les pages générées par ModuleBuilder)
 		$nsinfoversion = (string) @file_get_contents(dol_buildpath('/nsinfo/VERSION'));
 		if (!isModEnabled('nsinfo') || version_compare(trim($nsinfoversion), '23.8.0', '<')) {
 			$langs->load('nsaddeinvoicing@nsaddeinvoicing');
@@ -158,10 +158,10 @@ class modNsaddeinvoicing extends DolibarrModules
 
 		$result = $this->_load_tables('/nsaddeinvoicing/sql/');
 		if ($result < 0) {
-			return -1; // Do not activate module if error 'not allowed' returned when loading module SQL queries (the _load_table run sql with run_sql with the error allowed parameter set to 'default')
+			return -1; // Ne pas activer le module si l'erreur 'not allowed' est renvoyée lors du chargement des requêtes SQL du module (_load_table exécute le SQL avec run_sql, paramètre d'erreur autorisé réglé sur 'default')
 		}
 
-		// Permissions
+		// Droits
 		$this->remove($options);
 
 		$sql = array();
@@ -170,12 +170,12 @@ class modNsaddeinvoicing extends DolibarrModules
 	}
 
 	/**
-	 *  Function called when module is disabled.
-	 *  Remove from database constants, boxes and permissions from Dolibarr database.
-	 *  Data directories are not deleted
+	 *  Fonction appelée à la désactivation du module.
+	 *  Supprime de la base Dolibarr les constantes, boîtes et droits.
+	 *  Les répertoires de données ne sont pas supprimés
 	 *
-	 * @param string $options Options when enabling module ('', 'noboxes')
-	 * @return     int                 1 if OK, 0 if KO
+	 * @param string $options Options à la désactivation du module ('', 'noboxes')
+	 * @return     int                 1 si OK, 0 si KO
 	 */
 	public function remove($options = '')
 	{

@@ -22,16 +22,16 @@
  * \brief   Nsaddeinvoicing setup page.
  */
 
-// Load Dolibarr environment
+// Chargement de l'environnement Dolibarr
 $res = 0;
-// Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
+// Essai de main.inc.php dans la racine web connue, définie dans CONTEXT_DOCUMENT_ROOT (pas toujours définie)
 if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) $res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/main.inc.php";
-// Try main.inc.php into web root detected using web root calculated from SCRIPT_FILENAME
+// Essai de main.inc.php dans la racine web détectée à partir de SCRIPT_FILENAME
 $tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME']; $tmp2 = realpath(__FILE__); $i = strlen($tmp) - 1; $j = strlen($tmp2) - 1;
 while ($i > 0 && $j > 0 && isset($tmp[$i]) && isset($tmp2[$j]) && $tmp[$i] == $tmp2[$j]) { $i--; $j--; }
 if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/main.inc.php")) $res = @include substr($tmp, 0, ($i + 1))."/main.inc.php";
 if (!$res && $i > 0 && file_exists(dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php")) $res = @include dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php";
-// Try main.inc.php using relative path
+// Essai de main.inc.php avec un chemin relatif
 if (!$res && file_exists("../../main.inc.php")) $res = @include "../../main.inc.php";
 if (!$res && file_exists("../../../main.inc.php")) $res = @include "../../../main.inc.php";
 if (!$res) die("Include of main fails");
@@ -48,7 +48,7 @@ dol_include_once('/nsinfo/lib/setup.lib.php');
 // Translations
 $langs->loadLangs(array("admin", "nsinfo@nsinfo", "nsaddeinvoicing@nsaddeinvoicing"));
 
-// Access control
+// Contrôle d'accès
 if (!$user->admin) accessforbidden();
 
 // Parameters
@@ -61,12 +61,14 @@ $valuetxt = GETPOST($vartxt, 'alpha');
 $varcolor = GETPOST('varcolor', 'alpha');
 $varround = GETPOST('varround', 'alpha');
 $value = GETPOST('value', 'alpha');
-$varlist = GETPOST('varlst', 'aZ09');	// Types listsel / seltags / multilistsel of nsinfoSetup()
+$varlist = GETPOST('varlst', 'aZ09');	// Types listsel / seltags / multilistsel de nsinfoSetup()
 
 
 $arrayofparameters = array(
 	'NSADDEINVOICING_GENERAL1'	=> array('type' => 'titletab', 'title' => 'NSADDEINVOICING_GENERAL1'),
 	'TABDEB' 						=> array('type' => 'tabdeb'),
+	'NSADDEINVOICING_DROPDOWN_OVERFLOW'	=> array('type' => 'bool', 'default' => 0, 'Tooltip' => 1),
+	'NSADDEINVOICING_POPUP_HEIGHT'		=> array('type' => 'bool', 'default' => 0, 'Tooltip' => 1),
 	'TABFIN1' 						=> array('type' => 'tabfin'),
 );
 
@@ -99,13 +101,13 @@ $linkback = '<a href="'.($backtopage ? $backtopage : DOL_URL_ROOT.'/admin/module
 
 print load_fiche_titre($langs->trans($page_name), $linkback, 'object_nsaddeinvoicing@nsaddeinvoicing');
 
-// Configuration header
+// En-tête de la configuration
 $head = nsaddeinvoicingAdminPrepareHead();
 print dol_get_fiche_head($head, 'settings', $langs->trans("Settings"), -1, "nsaddeinvoicing@nsaddeinvoicing");
 
 nsinfoSetup($arrayofparameters);
 
-// Page end
+// Fin de page
 print dol_get_fiche_end();
 
 llxFooter();

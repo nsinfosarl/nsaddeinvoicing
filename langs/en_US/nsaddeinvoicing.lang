@@ -1,35 +1,39 @@
-# Translation file
+# Fichier de traduction
 
 #
-# Generic
+# Générique
 #
 
-# Module label 'ModuleNsaddeinvoicingName'
+# Libellé du module 'ModuleNsaddeinvoicingName'
 ModuleNsaddeinvoicingName = E-invoicing add-on
-# Module description 'ModuleNsaddeinvoicingDesc'
+# Description du module 'ModuleNsaddeinvoicingDesc'
 ModuleNsaddeinvoicingDesc = Mass actions on the lines of draft supplier invoices: change the reference (products of the supplier) and delete the lines checked
 NsaddeinvoicingDescription = E-invoicing add-on
 
 #
-# Admin page
+# Page d'administration
 #
 NsaddeinvoicingSetup = E-invoicing add-on - Setup
 NsaddeinvoicingErrorNsinfoRequired = The NSINFO framework version 23.8.0 or more is required: the module "NS INFO" (nsinfo) must be installed and enabled before enabling the module "E-invoicing add-on".
 Settings = Settings
 NSADDEINVOICING_GENERAL1=Options
+NSADDEINVOICING_DROPDOWN_OVERFLOW = Force the dropdown list to overflow the popup
+NSADDEINVOICING_DROPDOWN_OVERFLOW_Tooltip = In the "Change reference" window, the product list is displayed above the popup instead of inside it. Enable it if the list is cut off or badly displayed (browsers on macOS in particular).
+NSADDEINVOICING_POPUP_HEIGHT = Force the popup height to the height of the standard dropdown list
+NSADDEINVOICING_POPUP_HEIGHT_Tooltip = In the "Change reference" window, the popup is extended downwards by the height of the product list (search field and 200 px of results): the list opened below the last line fits inside the popup without being cut off (display on macOS).
 
 #
-# About page
+# Page À propos
 #
 About = About
 NsaddeinvoicingAbout = E-invoicing add-on - About
 
 #
-# Home page
+# Page d'accueil
 #
 NsaddeinvoicingArea = E-invoicing add-on
 
-# Mass actions on the lines
+# Actions de masse sur les lignes
 NsaddeinvoicingActions = Actions on the lines
 NsaddeinvoicingChangeRef = Change the reference
 NsaddeinvoicingDeleteLines = Delete the lines

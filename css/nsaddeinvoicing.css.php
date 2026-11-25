@@ -40,13 +40,13 @@ if (!defined('NOREQUIREAJAX')) {
 	define('NOREQUIREAJAX', '1');
 }
 
-// Load Dolibarr environment
+// Chargement de l'environnement Dolibarr
 $res = 0;
-// Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
+// Essai de main.inc.php dans la racine web connue, définie dans CONTEXT_DOCUMENT_ROOT (pas toujours définie)
 if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
 	$res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/main.inc.php";
 }
-// Try main.inc.php into web root detected using web root calculated from SCRIPT_FILENAME
+// Essai de main.inc.php dans la racine web détectée à partir de SCRIPT_FILENAME
 $tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME'];
 $tmp2 = realpath(__FILE__);
 $i = strlen($tmp) - 1;
@@ -61,7 +61,7 @@ if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/main.inc.php")) {
 if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/../main.inc.php")) {
 	$res = @include substr($tmp, 0, ($i + 1))."/../main.inc.php";
 }
-// Try main.inc.php using relative path
+// Essai de main.inc.php avec un chemin relatif
 if (!$res && file_exists("../../main.inc.php")) {
 	$res = @include "../../main.inc.php";
 }
@@ -74,9 +74,9 @@ if (!$res) {
 
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions2.lib.php';
 
-// Define css type
+// Définition du type CSS
 top_httphead('text/css');
-// Important: Following code is to avoid page request by browser and PHP CPU at each Dolibarr page access.
+// Important : le code suivant évite au navigateur et au CPU PHP une requête à chaque accès à une page Dolibarr.
 if (empty($dolibarr_nocache)) {
 	header('Cache-Control: max-age=10800, public, must-revalidate');
 } else {
@@ -84,7 +84,7 @@ if (empty($dolibarr_nocache)) {
 }
 ?>
 
-/* Object picto (img/object_nsaddeinvoicing.png is a large image): size it like the standard pictos */
+/* Pictogramme de l'objet (img/object_nsaddeinvoicing.png est une grande image) : le dimensionner comme les pictos standard */
 img[src$="/nsaddeinvoicing/img/object_nsaddeinvoicing.png"] {
 	width: 16px;
 	height: 16px;
@@ -98,7 +98,7 @@ div.photoref img[src$="/nsaddeinvoicing/img/object_nsaddeinvoicing.png"] {
 	width: 48px;
 	height: 48px;
 }
-/* Box of the module on the modules page (Setup > Modules): keep the size given by Dolibarr */
+/* Encadré du module sur la page des modules (Configuration > Modules) : garder la taille donnée par Dolibarr */
 .info-box-icon img[src$="/nsaddeinvoicing/img/object_nsaddeinvoicing.png"] {
 	width: auto;
 	height: auto;

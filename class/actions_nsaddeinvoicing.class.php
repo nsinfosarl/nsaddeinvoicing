@@ -18,7 +18,7 @@
 /**
  * \file    nsaddeinvoicing/class/actions_nsaddeinvoicing.class.php
  * \ingroup nsaddeinvoicing
- * \brief   Hooks of the card of the supplier invoices : mass actions on the lines of a draft invoice (change of the reference, deletion)
+ * \brief   Hooks de la fiche des factures fournisseur : actions de masse sur les lignes d'une facture brouillon (changement de référence, suppression)
  */
 
 /**
@@ -27,34 +27,34 @@
 class ActionsNsaddeinvoicing
 {
 	/**
-	 * @var DoliDB Database handler
+	 * @var DoliDB Gestionnaire de base de données
 	 */
 	public $db;
 
 	/**
-	 * @var string Error
+	 * @var string Erreur
 	 */
 	public $error = '';
 
 	/**
-	 * @var string[] Errors
+	 * @var string[] Erreurs
 	 */
 	public $errors = array();
 
 	/**
-	 * @var array<string,mixed> Hook results
+	 * @var array<string,mixed> Résultats du hook
 	 */
 	public $results = array();
 
 	/**
-	 * @var string String displayed by executeHook()
+	 * @var string Chaîne affichée par executeHook()
 	 */
 	public $resprints;
 
 	/**
-	 * Constructor
+	 * Constructeur
 	 *
-	 * @param DoliDB $db Database handler
+	 * @param DoliDB $db Gestionnaire de base de données
 	 */
 	public function __construct($db)
 	{
@@ -62,10 +62,10 @@ class ActionsNsaddeinvoicing
 	}
 
 	/**
-	 * Return if the mass actions are available on this card : draft supplier invoice (not a situation or template), right to modify it
+	 * Indique si les actions de masse sont disponibles sur cette fiche : facture fournisseur brouillon (pas une situation ni un modèle), droit de la modifier
 	 *
-	 * @param	array<string,mixed>	$parameters	Hook metadata
-	 * @param	?CommonObject		$object		Object
+	 * @param	array<string,mixed>	$parameters	Métadonnées du hook
+	 * @param	?CommonObject		$object		Objet
 	 * @return	bool
 	 */
 	private function isAvailable($parameters, $object)
@@ -83,9 +83,9 @@ class ActionsNsaddeinvoicing
 	}
 
 	/**
-	 * Products available for the supplier of the invoice : one entry for each product and reference of the supplier (price of purchase of the supplier)
+	 * Produits disponibles pour le fournisseur de la facture : une entrée par produit et référence du fournisseur (prix d'achat du fournisseur)
 	 *
-	 * @param	CommonObject	$object	Supplier invoice
+	 * @param	CommonObject	$object	Facture fournisseur
 	 * @return	array<int,array{key:string,pid:int,ref:string,label:string,reffourn:string}>
 	 */
 	private function getSupplierProducts($object)
@@ -110,12 +110,12 @@ class ActionsNsaddeinvoicing
 	}
 
 	/**
-	 * Actions of the card : change of the reference of the lines checked, deletion of the lines checked
+	 * Actions de la fiche : changement de la référence des lignes cochées, suppression des lignes cochées
 	 *
-	 * @param	array<string,mixed>	$parameters		Hook metadata
-	 * @param	CommonObject		$object			Object
-	 * @param	string				$action			Current action
-	 * @param	HookManager			$hookmanager	Hook manager
+	 * @param	array<string,mixed>	$parameters		Métadonnées du hook
+	 * @param	CommonObject		$object			Objet
+	 * @param	string				$action			Action en cours
+	 * @param	HookManager			$hookmanager	Gestionnaire de hooks
 	 * @return	int									0
 	 */
 	public function doActions($parameters, &$object, &$action, $hookmanager)
@@ -143,7 +143,7 @@ class ActionsNsaddeinvoicing
 		}
 
 		if ($action == 'nsaddei_changeref') {
-			// New reference chosen for each line : key "<product id>|<reference of the supplier>" checked in the list of the supplier of the invoice
+			// Nouvelle référence choisie pour chaque ligne : clé "<id produit>|<référence du fournisseur>" cochée dans la liste du fournisseur de la facture
 			$allowed = array();
 			foreach ($this->getSupplierProducts($object) as $p) {
 				$allowed[$p['key']] = $p;
@@ -185,12 +185,12 @@ class ActionsNsaddeinvoicing
 	}
 
 	/**
-	 * End of the page : checkbox of each line, list of the mass actions above the lines (with Font Awesome 7 pictos) and popups
+	 * Fin de page : case à cocher de chaque ligne, liste des actions de masse au-dessus des lignes (avec les pictos Font Awesome 7) et popups
 	 *
-	 * @param	array<string,mixed>	$parameters		Hook metadata
-	 * @param	?CommonObject		$object			Not given : read in the globals
-	 * @param	?string				$action			Not given : read in the globals
-	 * @param	HookManager			$hookmanager	Hook manager
+	 * @param	array<string,mixed>	$parameters		Métadonnées du hook
+	 * @param	?CommonObject		$object			Non fourni : lu dans les globales
+	 * @param	?string				$action			Non fourni : lu dans les globales
+	 * @param	HookManager			$hookmanager	Gestionnaire de hooks
 	 * @return	int									0
 	 */
 	public function printCommonFooter($parameters, &$object, &$action, $hookmanager)
@@ -231,19 +231,21 @@ class ActionsNsaddeinvoicing
 				'confirmdel' => $langs->transnoentitiesnoconv('NsaddeinvoicingConfirmDelete'), 'noprod' => $langs->transnoentitiesnoconv('NsaddeinvoicingNoSupplierProduct'), 'all' => $langs->transnoentitiesnoconv('NsaddeinvoicingCheckAll'),
 			),
 			'token' => newToken(), 'url' => $_SERVER['PHP_SELF'].'?id='.((int) $obj->id),
+			'overflow' => getDolGlobalInt('NSADDEINVOICING_DROPDOWN_OVERFLOW') ? 1 : 0,
+			'popupheight' => getDolGlobalInt('NSADDEINVOICING_POPUP_HEIGHT') ? 1 : 0,
 		);
 		$js = <<<'JS'
 jQuery(function ($) {
 	var C = window.nsaddei, table = $("#tablelines");
 	if (!table.length) { return; }
-	// Checkbox of each line (first column) and of the header
+	// Case à cocher de chaque ligne (première colonne) et de l'en-tête
 	table.find("tr").each(function () {
 		var tr = $(this), m = /^row-(\d+)$/.exec(tr.attr("id") || ""), tag = tr.children("th").length && !m ? "th" : "td", html = "";
 		if (tr.hasClass("liste_titre") && !m) { html = "<input type=\"checkbox\" class=\"nsaddei-all\" title=\"" + C.txt.all + "\">"; }
 		else if (m) { html = "<input type=\"checkbox\" class=\"nsaddei-check\" value=\"" + m[1] + "\">"; }
 		tr.prepend("<" + tag + " class=\"nsaddei-sel center\" style=\"width: 24px;\">" + html + "</" + tag + ">");
 	});
-	// List of the mass actions (menu with Font Awesome 7 pictos), shown when at least one line is checked
+	// Liste des actions de masse (menu avec les pictos Font Awesome 7), affichée dès qu'une ligne est cochée
 	var bar = $("<div class=\"nsaddei-bar\" style=\"display: none; margin: 4px 0 8px 0; position: relative;\"></div>");
 	var btn = $("<a href=\"#\" class=\"butAction nsaddei-btn\" style=\"margin: 0;\"></a>").html(C.icons.actions + C.txt.actions + " <span class=\"nsaddei-nb\"></span> <span class=\"opacitymedium\">&#9662;</span>");
 	var menu = $("<ul class=\"nsaddei-menu\" style=\"display: none; position: absolute; z-index: 1000; list-style: none; margin: 2px 0 0 0; padding: 4px 0; background: var(--colorbackbody, #fff); border: 1px solid rgba(128,128,128,.35); border-radius: 8px; box-shadow: 0 4px 14px rgba(20,24,43,.18); min-width: 240px;\"></ul>");
@@ -273,7 +275,7 @@ jQuery(function ($) {
 				{text: C.txt.cancel, click: function () { $(this).dialog("close"); }}]});
 			return;
 		}
-		// Change of the reference : current reference of each line, and new reference among the products of the supplier of the invoice
+		// Changement de référence : référence actuelle de chaque ligne, et nouvelle référence parmi les produits du fournisseur de la facture
 		var opts = "<option value=\"\">" + esc(C.txt.keep) + "</option>";
 		$.each(C.products, function (i, p) { opts += "<option value=\"" + esc(p.key) + "\">" + esc((p.reffourn ? p.reffourn + " - " : "") + p.ref + (p.label ? " - " + p.label : "")) + "</option>"; });
 		var html = "<table class=\"noborder centpercent\"><tr class=\"liste_titre\"><td>" + esc(C.txt.current) + "</td><td>" + esc(C.txt.new) + "</td></tr>";
@@ -286,7 +288,25 @@ jQuery(function ($) {
 		d2.dialog({modal: true, width: 760, resizable: false, title: C.txt.change, buttons: [
 			{text: C.txt.ok, click: function () { var f = []; d2.find("select.nsaddei-new").each(function () { if ($(this).val()) { f.push(["nsaddei_new[" + $(this).data("line") + "]", $(this).val()]); } }); if (f.length) { post("nsaddei_changeref", f); } else { $(this).dialog("close"); } }},
 			{text: C.txt.cancel, click: function () { $(this).dialog("close"); }}],
-			open: function () { if ($.fn.select2) { d2.find("select").select2({dropdownParent: d2.parent(), width: "100%"}); } }});
+			open: function () {
+				if (C.popupheight) {
+					// Option « hauteur de la popup » : place réservée sous la dernière ligne pour la liste standard
+					// (zone de recherche + 200 px de résultats de select2), puis popup recentrée
+					d2.css("padding-bottom", "250px");
+					d2.dialog("option", "position", {my: "center", at: "center", of: window});
+				}
+				if (!$.fn.select2) { return; }
+				if (C.overflow) {
+					// Option « débordement forcé » (affichage macOS) : liste rattachée au body, au-dessus de la popup
+					d2.find("select").select2({dropdownParent: $(document.body), width: "100%"}).on("select2:open", function () { $(".select2-container--open").last().css("z-index", 100000); });
+					// La popup modale bloque le focus hors d'elle : on autorise la zone de recherche de la liste
+					var inst = d2.dialog("instance");
+					if (inst && inst._allowInteraction) { var orig = inst._allowInteraction; inst._allowInteraction = function (e) { return $(e.target).closest(".select2-container, .select2-dropdown").length > 0 || orig.apply(this, arguments); }; }
+				} else {
+					d2.find("select").select2({dropdownParent: d2.parent(), width: "100%"});
+				}
+			},
+			close: function () { if ($.fn.select2) { d2.find("select").each(function () { if ($(this).data("select2")) { $(this).select2("close"); } }); } }});
 	});
 	refresh();
 });

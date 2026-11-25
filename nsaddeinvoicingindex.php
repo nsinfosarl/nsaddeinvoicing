@@ -26,13 +26,13 @@
  *	\brief      Home page of nsaddeinvoicing top menu
  */
 
-// Load Dolibarr environment
+// Chargement de l'environnement Dolibarr
 $res = 0;
-// Try main.inc.php into web root known defined into CONTEXT_DOCUMENT_ROOT (not always defined)
+// Essai de main.inc.php dans la racine web connue, définie dans CONTEXT_DOCUMENT_ROOT (pas toujours définie)
 if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
 	$res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/main.inc.php";
 }
-// Try main.inc.php into web root detected using web root calculated from SCRIPT_FILENAME
+// Essai de main.inc.php dans la racine web détectée à partir de SCRIPT_FILENAME
 $tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME'];
 $tmp2 = realpath(__FILE__);
 $i = strlen($tmp) - 1;
@@ -47,7 +47,7 @@ if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/main.inc.php")) {
 if (!$res && $i > 0 && file_exists(dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php")) {
 	$res = @include dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php";
 }
-// Try main.inc.php using relative path
+// Essai de main.inc.php avec un chemin relatif
 if (!$res && file_exists("../main.inc.php")) {
 	$res = @include "../main.inc.php";
 }
@@ -71,7 +71,7 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
  * @var User $user
  */
 
-// Load translation files required by the page
+// Chargement des fichiers de traduction nécessaires à la page
 $langs->loadLangs(array("nsaddeinvoicing@nsaddeinvoicing"));
 
 $action = GETPOST('action', 'aZ09');
@@ -79,17 +79,17 @@ $action = GETPOST('action', 'aZ09');
 $now = dol_now();
 $max = getDolGlobalInt('MAIN_SIZE_SHORTLIST_LIMIT', 5);
 
-// Security check - Protection if external user
+// Contrôle de sécurité : protection si l'utilisateur est externe
 $socid = GETPOSTINT('socid');
 if (!empty($user->socid) && $user->socid > 0) {
 	$action = '';
 	$socid = $user->socid;
 }
 
-// Initialize a technical object to manage hooks. Note that conf->hooks_modules contains array
+// Initialisation d'un objet technique pour gérer les hooks. Attention : conf->hooks_modules contient un tableau
 //$hookmanager->initHooks(array($object->element.'index'));
 
-// Security check (enable the most restrictive one)
+// Contrôle de sécurité (activer le plus restrictif)
 //if ($user->socid > 0) accessforbidden();
 //if ($user->socid > 0) $socid = $user->socid;
 //if (!isModEnabled('nsaddeinvoicing')) {
@@ -108,11 +108,11 @@ if (!empty($user->socid) && $user->socid > 0) {
  * Actions
  */
 
-// None
+// Aucune
 
 
 /*
- * View
+ * Affichage
  */
 
 $form = new Form($db);
@@ -126,7 +126,7 @@ print '<div class="fichecenter"><div class="fichethirdleft">';
 
 
 /* BEGIN MODULEBUILDER DRAFT MYOBJECT
-// Draft MyObject
+// Brouillon de MyObject
 if (isModEnabled('nsaddeinvoicing') && $user->hasRight('nsaddeinvoicing', 'read')) {
 	$langs->load("orders");
 
@@ -201,7 +201,7 @@ print '</div><div class="fichetwothirdright">';
 
 
 /* BEGIN MODULEBUILDER LASTMODIFIED MYOBJECT
-// Last modified myobject
+// Dernier myobject modifié
 if (isModEnabled('nsaddeinvoicing') && $user->hasRight('nsaddeinvoicing', 'read')) {
 	$sql = "SELECT s.rowid, s.ref, s.label, s.date_creation, s.tms";
 	$sql.= " FROM ".$db->prefix()."nsaddeinvoicing_myobject as s";
@@ -254,6 +254,6 @@ if (isModEnabled('nsaddeinvoicing') && $user->hasRight('nsaddeinvoicing', 'read'
 
 print '</div></div>';
 
-// End of page
+// Fin de page
 llxFooter();
 $db->close();

@@ -14,27 +14,31 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 #
-# Generic
+# Générique
 #
 
-# Module label 'ModuleNsaddeinvoicingName'
+# Libellé du module 'ModuleNsaddeinvoicingName'
 ModuleNsaddeinvoicingName = Complément e-invoicing
-# Module description 'ModuleNsaddeinvoicingDesc'
+# Description du module 'ModuleNsaddeinvoicingDesc'
 ModuleNsaddeinvoicingDesc = Actions de masse sur les lignes des factures fournisseur en brouillon : changer la référence (produits du fournisseur) et supprimer les lignes cochées
 NsaddeinvoicingDescription = Complément e-invoicing
 
 #
-# Admin page
+# Page d'administration
 #
 NsaddeinvoicingSetup = Complément e-invoicing - Réglages
 Settings = Réglages
 NsaddeinvoicingAbout = Complément e-invoicing - À propos
 
 NSADDEINVOICING_GENERAL1=Options
+NSADDEINVOICING_DROPDOWN_OVERFLOW = Forcer le débordement de la liste déroulante hors de la popup
+NSADDEINVOICING_DROPDOWN_OVERFLOW_Tooltip = Dans la fenêtre « Changer la référence », la liste des produits s'affiche au-dessus de la popup au lieu d'y être contenue. À activer si la liste est coupée ou mal affichée (navigateurs sous macOS notamment).
+NSADDEINVOICING_POPUP_HEIGHT = Forcer la hauteur de la popup à la hauteur de la liste déroulante standard
+NSADDEINVOICING_POPUP_HEIGHT_Tooltip = Dans la fenêtre « Changer la référence », la popup est agrandie vers le bas de la hauteur de la liste des produits (zone de recherche et 200 px de résultats) : la liste ouverte sous la dernière ligne tient dans la popup sans être coupée (affichage sous macOS).
 NsaddeinvoicingErrorNsinfoRequired = Le framework NSINFO version 23.8.0 ou plus est obligatoire : le module « NS INFO » (nsinfo) doit être installé et activé avant d'activer le module « Complément e-invoicing ».
 NsaddeinvoicingArea = Complément e-invoicing
 
-# Mass actions on the lines
+# Actions de masse sur les lignes
 NsaddeinvoicingActions = Actions sur les lignes
 NsaddeinvoicingChangeRef = Changer la référence
 NsaddeinvoicingDeleteLines = Supprimer les lignes
